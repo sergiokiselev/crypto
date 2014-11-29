@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class BigInt {
 
-    private int[] number;
+    public int[] number;
 
     public BigInt(int size) {
         this.number = new int[size];
@@ -49,7 +49,7 @@ public class BigInt {
                 res = multiply(this);
                 n.number[0]--;
             } else {
-                this = this.multiply(this);
+                this.set(this.multiply(this));
                 n =  this.divideByTwo();
             }
             for (int elem : n.number) {
@@ -62,6 +62,10 @@ public class BigInt {
             }
         }
         return res;
+    }
+
+    private void set(BigInt multiply) {
+        this.number = multiply.number;
     }
 
     public BigInt divideByTwo() {
@@ -151,7 +155,7 @@ public class BigInt {
         return result;
     }
 
-    public BigInt mod(int[] b) {
+    public BigInt mod(BigInt b) {
 
         int start = this.getLength() - 1;
         while(this.number[start] == 0) {
@@ -163,15 +167,15 @@ public class BigInt {
         for (int i = start; i >= 0;i--) {
             revA[start - i] = (byte)this.number[i];
         }
-        start = b.length - 1;
-        while(b[start] == 0) {
+        start = b.getLength() - 1;
+        while(b.number[start] == 0) {
             start--;
             if (start==-1)
                 break;
         }
         byte[] revB = new byte[start+1];
         for (int i = start; i >= 0;i--) {
-            revB[start - i] = (byte)b[i];
+            revB[start - i] = (byte)b.number[i];
         }
         String aStr = "";
         for (byte aa : revA) {
