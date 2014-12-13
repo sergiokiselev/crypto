@@ -4,7 +4,7 @@ public class CongruentGenerator {
 
     public static ArrayList<Double> generate(double c, double M, double a, long t) {
         ArrayList<Double> result = new ArrayList<Double>();
-        double x0 = a;
+        double x0 = new Random().nextDouble();
         double x;
         result.add(new Random().nextDouble());
         int i = 1;
